@@ -1,15 +1,6 @@
-from flask import Flask, render_template
-app = Flask(__name__)
+from app import app
+from app.models import User , Post
 
-@app.route("/")
-def index():
-    user_dict = {
-        'username': 'barbiesan',
-        'email': 'barbiesan@gmail.com'
-        }  
-    colors = ['red','pink','green']
-    return render_template('index.html', user=user_dict, colors=colors)
-
-@app.route('/test')
-def test():
-    return 'this is a test'
+@app.shell_context_processor
+def make_context():
+    return {'db': 'db', 'Post' : Post ,'User' :User}
